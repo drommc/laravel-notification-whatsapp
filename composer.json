@@ -1,5 +1,5 @@
 {
-    "name": "netflie/laravel-notification-whatsapp",
+    "name": "drommc/laravel-notification-whatsapp",
     "description": "Laravel notification driver for WhatsApp",
     "homepage": "https://github.com/netflie/laravel-notification-whatsapp",
     "license": "MIT",
