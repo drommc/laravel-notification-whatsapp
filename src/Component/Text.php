@@ -13,9 +13,11 @@ class Text extends Component
 
     public function toArray(): array
     {
-        return [
+        $baseArray = [
             'type' => 'text',
             'text' => $this->text,
         ];
+
+        return $this->buildParameterArray($baseArray);
     }
 }

@@ -19,12 +19,14 @@ class Currency extends Component
 
     public function toArray(): array
     {
-        return [
+        $baseArray = [
             'type' => 'currency',
             'currency' => [
                 'code' => $this->code,
                 'amount_1000' => (int) ($this->amount * 1000),
             ],
         ];
+
+        return $this->buildParameterArray($baseArray);
     }
 }

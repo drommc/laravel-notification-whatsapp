@@ -16,11 +16,13 @@ class DateTime extends Component
 
     public function toArray(): array
     {
-        return [
+        $baseArray = [
             'type' => 'date_time',
             'date_time' => [
                 'fallback_value' => $this->dateTime->format($this->format),
             ],
         ];
+
+        return $this->buildParameterArray($baseArray);
     }
 }

@@ -9,12 +9,14 @@ abstract class Button extends Component
 
     public function toArray(): array
     {
-        return [
+        $baseArray = [
             'type' => 'button',
             'sub_type' => $this->subType(), // quick_reply|url
             'index' => $this->index,
             'parameters' => $this->parameters,
         ];
+
+        return $this->buildParameterArray($baseArray);
     }
 
     /**

@@ -37,12 +37,14 @@ class Document extends Component
 
     public function toArray(): array
     {
-        return [
+        $baseArray = [
             'type' => 'document',
             'document' => [
                 'link' => $this->link,
                 'filename' => $this->filename,
             ],
         ];
+
+        return $this->buildParameterArray($baseArray);
     }
 }

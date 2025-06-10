@@ -16,11 +16,13 @@ class Video extends Component
 
     public function toArray(): array
     {
-        return [
+        $baseArray = [
             'type' => 'video',
             'video' => [
                 'link' => $this->link,
             ],
         ];
+
+        return $this->buildParameterArray($baseArray);
     }
 }

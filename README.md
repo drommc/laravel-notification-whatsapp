@@ -87,6 +87,7 @@ Component::dateTime($dateTime, $format = 'Y-m-d H:i:s');
 Component::document($link);
 Component::image($link);
 Component::video($link);
+Component::location($latitude, $longitude, $name = null, $address = null);
 Component::text($text);
 Component::urlButton($array_of_urls);
 Component::quickReplyButton($array_of_payloads);
@@ -94,9 +95,43 @@ Component::flowButton($flow_token, $array_of_data);
 ```
 Components supported by Whatsapp template sections:
 
- - Header: image, video, document and text (the text accepts currency, datetime and text variables)
- - Body: currency, datetime and text
+ - Header: image, video, document, location and text (the text accepts currency, datetime and text variables)
+ - Body: currency, datetime, location and text
  - Buttons: url and quick reply, 
+
+### Named Parameters
+
+The WhatsApp Cloud API supports both positional and named parameters for template components. This package now supports named parameters using the `parameterName()` method on any component. Named parameters allow you to reference template variables by name instead of position, making your templates more maintainable and less prone to errors.
+
+```php
+<?php
+
+use NotificationChannels\WhatsApp\Component;
+use NotificationChannels\WhatsApp\WhatsAppTemplate;
+
+// Using named parameters
+return WhatsAppTemplate::create()
+    ->name('order_confirmation')
+    ->header(Component::image('https://example.com/product.jpg')->parameterName('product_image'))
+    ->body(Component::text('John Doe')->parameterName('customer_name'))
+    ->body(Component::currency(99.99, 'USD')->parameterName('order_total'))
+    ->body(Component::dateTime(new \DateTimeImmutable())->parameterName('delivery_date'))
+    ->buttons(Component::quickReplyButton(['Track Order', 'Contact Support'])->parameterName('action_buttons'))
+    ->to('34676010101');
+```
+
+You can also mix named and positional parameters in the same template:
+
+```php
+<?php
+
+return WhatsAppTemplate::create()
+    ->name('mixed_template')
+    ->body(Component::text('Welcome'))  // Positional parameter
+    ->body(Component::text('John Doe')->parameterName('customer_name'))  // Named parameter
+    ->body(Component::currency(50.00, 'EUR'))  // Positional parameter
+    ->to('34676010101');
+```
 
 ### Send a notification from a template
 

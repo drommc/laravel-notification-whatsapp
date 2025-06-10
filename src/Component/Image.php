@@ -16,11 +16,13 @@ class Image extends Component
 
     public function toArray(): array
     {
-        return [
+        $baseArray = [
             'type' => 'image',
             'image' => [
                 'link' => $this->link,
             ],
         ];
+
+        return $this->buildParameterArray($baseArray);
     }
 }
